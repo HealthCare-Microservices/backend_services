@@ -2,6 +2,7 @@ package com.healthcare.doctor_service.service;
 
 import com.healthcare.doctor_service.domain.Doctor;
 import com.healthcare.doctor_service.repository.DoctorRepository;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,33 +19,43 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor createDoctor(Doctor doctor) {
-        return doctorRepository.save(doctor);
+        try {
+            return doctorRepository.save(doctor);
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Error creating doctor: " + e.getMessage(), e);
+        }
     }
-
-//    @Override
-//    public boolean checkIfDoctorExists(String doctorId) {
-//        return doctorRepository.existsById(doctorId);
-//    }
-
-//    @Override
-//    public List<Doctor> getDoctorsByOpDays(String[] days) {
-//        return List.copyOf(doctorRepository.findAllByOpDaysContains(days));
-//    }
 
     @Override
     public List<Doctor> getAllDoctors() {
-        return List.copyOf(doctorRepository.findAll());
+        try {
+            return List.copyOf(doctorRepository.findAll());
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Error fetching all doctors: " + e.getMessage(), e);
+        }
     }
 
     @Override
     public Optional<Doctor> getDoctor(String id) {
-        return doctorRepository.findById(Long.valueOf(id));
+        try {
+            return doctorRepository.findById(Long.valueOf(id));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid doctor ID format: " + id, e);
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Error fetching doctor by ID: " + e.getMessage(), e);
+        }
     }
-
 
     @Override
     public boolean authenticateDoctor(String email, String password) {
-        Optional<Doctor> doctor = doctorRepository.findByEmail(email);
-        return doctor.isPresent() && doctor.get().getPassword().equals(password);
+        try {
+            Optional<Doctor> doctor = doctorRepository.findByEmail(email);
+            if (doctor.isEmpty()) {
+                throw new IllegalArgumentException("Doctor with email " + email + " not found.");
+            }
+            return doctor.get().getPassword().equals(password);
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Error during doctor authentication: " + e.getMessage(), e);
+        }
     }
 }
