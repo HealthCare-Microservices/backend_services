@@ -16,4 +16,6 @@ public interface DoctorService {
     List<Doctor> getAllDoctors();
 
     Optional<Doctor> getDoctor(String id);
+
+    public boolean authenticateDoctor(String email, String password);
 }

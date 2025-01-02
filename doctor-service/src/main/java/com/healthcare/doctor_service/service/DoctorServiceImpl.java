@@ -40,4 +40,11 @@ public class DoctorServiceImpl implements DoctorService {
     public Optional<Doctor> getDoctor(String id) {
         return doctorRepository.findById(Long.valueOf(id));
     }
+
+
+    @Override
+    public boolean authenticateDoctor(String email, String password) {
+        Optional<Doctor> doctor = doctorRepository.findByEmail(email);
+        return doctor.isPresent() && doctor.get().getPassword().equals(password);
+    }
 }

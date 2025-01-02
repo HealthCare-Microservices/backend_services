@@ -38,4 +38,15 @@ public class DoctorController {
         }
         return ResponseEntity.ok(DoctorDto.toDtos(doctors));
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginDoctor(@RequestParam String email, @RequestParam String password) {
+        boolean isAuthenticated = doctorService.authenticateDoctor(email, password);
+        if (isAuthenticated) {
+            return ResponseEntity.ok("Login successful!");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password.");
+        }
+    }
+    
 }
