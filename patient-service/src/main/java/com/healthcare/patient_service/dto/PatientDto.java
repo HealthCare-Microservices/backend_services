@@ -5,8 +5,10 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public record PatientDto(
@@ -21,15 +23,18 @@ public record PatientDto(
         String email,
 
         @NotEmpty(message = "Phone is required")
-        @Pattern(regexp = "^\\d{10}$", message = "Phone is invalid")
+        @Pattern(regexp = "^\\d{10}$", message = "Phone must be a 10-digit number")
         String phone,
 
         @NotEmpty(message = "Address is required")
         String address,
-
+        @NotNull(message = "Date of birth is required")
         @Past(message = "Date of birth must be in the past")
         LocalDate dob,
 
         List<String> illnesses
 ) {
+        public List<String> illnesses() {
+                return illnesses != null ? illnesses : new ArrayList<>();
+        }
 }
