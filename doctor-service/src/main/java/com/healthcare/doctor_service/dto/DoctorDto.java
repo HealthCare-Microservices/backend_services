@@ -18,6 +18,9 @@ public record DoctorDto(
         @Email(message = "Email is invalid")
         String email,
 
+        @NotBlank(message = "Password is required")
+        String password,
+
         @NotBlank(message = "Phone is required")
         @Pattern(regexp = "^[0-9]{3}-[0-9]{3}-[0-9]{4}$", message = "Phone is invalid")
         String phone,
@@ -40,6 +43,7 @@ public record DoctorDto(
                 .id(doctorDto.id())
                 .fullName(doctorDto.fullName())
                 .email(doctorDto.email())
+                .password(doctorDto.password()) // Handle the password field
                 .phone(doctorDto.phone())
                 .address(doctorDto.address())
                 .opDays(doctorDto.opDays())
@@ -52,6 +56,7 @@ public record DoctorDto(
                 .id(id)
                 .fullName(fullName)
                 .email(email)
+                .password(password) // Handle the password field
                 .phone(phone)
                 .address(address)
                 .opDays(opDays)
@@ -64,6 +69,7 @@ public record DoctorDto(
                 doctor.getId(),
                 doctor.getFullName(),
                 doctor.getEmail(),
+                doctor.getPassword(),
                 doctor.getPhone(),
                 doctor.getAddress(),
                 doctor.getOpDays(),
