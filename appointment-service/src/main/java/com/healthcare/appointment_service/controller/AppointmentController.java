@@ -22,7 +22,7 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
 
-    @PostMapping
+    @PostMapping("create")
     public ResponseEntity<AppointmentDto> createAppointment(@RequestBody AppointmentDto dto) {
         Patient patient = appointmentService.getPatientById(dto.patientId());
         if (patient == null) {
