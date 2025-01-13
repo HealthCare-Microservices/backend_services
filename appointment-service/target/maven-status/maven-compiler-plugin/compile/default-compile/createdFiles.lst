@@ -1,0 +1,11 @@
+com\healthcare\appointment_service\dto\Patient.class
+com\healthcare\appointment_service\controller\AppointmentController.class
+com\healthcare\appointment_service\repository\AppointmentRepository.class
+com\healthcare\appointment_service\feign_clients\DoctorServiceClient.class
+com\healthcare\appointment_service\service\AppointmentServiceImpl.class
+com\healthcare\appointment_service\domain\Appointment.class
+com\healthcare\appointment_service\feign_clients\PatientServiceClient.class
+com\healthcare\appointment_service\service\AppointmentService.class
+com\healthcare\appointment_service\AppointmentServiceApplication.class
+com\healthcare\appointment_service\dto\AppointmentDto.class
+com\healthcare\appointment_service\dto\Doctor.class
