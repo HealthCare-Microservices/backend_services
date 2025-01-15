@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: patient-service-config
+data:
+  EUREKA_HOSTNAME: eureka-0
+  EUREKA_REGISTER_WITH_EUREKA: "true"
+  EUREKA_FETCH_REGISTRY: "true"
+  EUREKA_DEFAULT_ZONE: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+  DB_URL: jdbc:mysql://mysql-svc:3306/patient?createDatabaseIfNotExist=true
+  DB_USERNAME: root
+  DB_PASSWORD: "1234"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patient-service-app
+  labels:
+    app: patient-service-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app : patient-service-app
+  template:
+    metadata:
+      labels:
+        app: patient-service-app
+    spec:
+      containers:
+      - name: patient-service-app
+        image: 48483/patient-service:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8202
+        env:
+            - name: EUREKA_HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: patient-service-config
+                  key: EUREKA_HOSTNAME
+            - name: EUREKA_REGISTER_WITH_EUREKA
+              valueFrom:
+                configMapKeyRef:
+                  name: patient-service-config
+                  key: EUREKA_REGISTER_WITH_EUREKA
+            - name: EUREKA_FETCH_REGISTRY
+              valueFrom:
+                configMapKeyRef:
+                  name: patient-service-config
+                  key: EUREKA_FETCH_REGISTRY
+            - name: EUREKA_DEFAULT_ZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: patient-service-config
+                  key: EUREKA_DEFAULT_ZONE
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: patient-service-config
+                  key: DB_URL
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: patient-service-config
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: patient-service-config
+                  key: DB_PASSWORD
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name:  patient-service-svc
+spec:
+  selector:
+    app:  patient-service-app
+  ports:
+  - port:  80
+    targetPort:  8202

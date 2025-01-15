@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.healthcare.appointment_service.AppointmentServiceApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.762 s - in com.healthcare.appointment_service.AppointmentServiceApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.591 s - in com.healthcare.appointment_service.AppointmentServiceApplicationTests

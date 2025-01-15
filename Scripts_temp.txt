@@ -6,3 +6,15 @@ foreach ($service in $services) {
     docker push 48483/$service
 }
 
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+appointment-service : 8200
+doctor-service : 8201
+patient-service : 8202
+api-gateway : 8203
+service-registry : 8761

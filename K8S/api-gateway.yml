@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-app
+  labels:
+    app: api-gateway-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app : api-gateway-app
+  template:
+    metadata:
+      labels:
+        app: api-gateway-app
+    spec:
+      containers:
+      - name: api-gateway-app
+        image: 48483/api-gateway:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8203
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name:  patient-service-svc
+spec:
+  type: LoadBalancer
+  ports:
+  - port:  80
+    targetPort:  8203
+    protocol: TCP
+  selector:
+    app:  api-gateway-app
