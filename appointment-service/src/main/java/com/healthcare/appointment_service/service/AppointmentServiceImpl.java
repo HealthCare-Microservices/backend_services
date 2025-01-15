@@ -6,6 +6,7 @@ import com.healthcare.appointment_service.dto.Patient;
 import com.healthcare.appointment_service.feign_clients.DoctorServiceClient;
 import com.healthcare.appointment_service.feign_clients.PatientServiceClient;
 import com.healthcare.appointment_service.repository.AppointmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -16,9 +17,14 @@ import java.util.Optional;
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
-    private final AppointmentRepository appointmentRepository;
-    private final DoctorServiceClient doctorServiceClient;
-    private final PatientServiceClient patientServiceClient;
+    @Autowired
+    AppointmentRepository appointmentRepository;
+
+    @Autowired
+    DoctorServiceClient doctorServiceClient;
+
+    @Autowired
+    PatientServiceClient patientServiceClient;
 
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository, DoctorServiceClient doctorServiceClient, PatientServiceClient patientServiceClient) {
         this.appointmentRepository = appointmentRepository;

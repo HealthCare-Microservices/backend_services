@@ -1,0 +1,11 @@
+E:\IIITB\Winter Project\backend_services\appointment-service\src\main\java\com\healthcare\appointment_service\service\AppointmentServiceImpl.java
+E:\IIITB\Winter Project\backend_services\appointment-service\src\main\java\com\healthcare\appointment_service\domain\Appointment.java
+E:\IIITB\Winter Project\backend_services\appointment-service\src\main\java\com\healthcare\appointment_service\dto\Patient.java
+E:\IIITB\Winter Project\backend_services\appointment-service\src\main\java\com\healthcare\appointment_service\dto\AppointmentDto.java
+E:\IIITB\Winter Project\backend_services\appointment-service\src\main\java\com\healthcare\appointment_service\dto\Doctor.java
+E:\IIITB\Winter Project\backend_services\appointment-service\src\main\java\com\healthcare\appointment_service\repository\AppointmentRepository.java
+E:\IIITB\Winter Project\backend_services\appointment-service\src\main\java\com\healthcare\appointment_service\service\AppointmentService.java
+E:\IIITB\Winter Project\backend_services\appointment-service\src\main\java\com\healthcare\appointment_service\feign_clients\DoctorServiceClient.java
+E:\IIITB\Winter Project\backend_services\appointment-service\src\main\java\com\healthcare\appointment_service\feign_clients\PatientServiceClient.java
+E:\IIITB\Winter Project\backend_services\appointment-service\src\main\java\com\healthcare\appointment_service\AppointmentServiceApplication.java
+E:\IIITB\Winter Project\backend_services\appointment-service\src\main\java\com\healthcare\appointment_service\controller\AppointmentController.java

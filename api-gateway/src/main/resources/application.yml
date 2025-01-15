@@ -1,0 +1,44 @@
+server:
+  port: 8203
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: DOCTOR-SERVICE
+          uri: lb://DOCTOR-SERVICE
+          predicates:
+            - Path=/doctors/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: DOCTOR-SERVICE
+                fallbackuri: forward:/doctorServiceFallBack
+        - id: PATIENT-SERVICE
+          uri: lb://PATIENT-SERVICE
+          predicates:
+            - Path=/patients/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: PATIENT-SERVICE
+                fallbackuri: forward:/patientServiceFallBack
+        - id: APPOINTMENT-SERVICE
+          uri: lb://APPOINTMENT-SERVICE
+          predicates:
+            - Path=/appointments/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: APPOINTMENT-SERVICE
+                fallbackuri: forward:/appointmentServiceFallBack
+
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000

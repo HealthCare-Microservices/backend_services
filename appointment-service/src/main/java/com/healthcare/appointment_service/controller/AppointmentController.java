@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/appointments")
+@RequestMapping("/appointments")
 public class AppointmentController {
 
     private final AppointmentService appointmentService;
@@ -22,7 +22,7 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
 
-    @PostMapping
+    @PostMapping("create")
     public ResponseEntity<AppointmentDto> createAppointment(@RequestBody AppointmentDto dto) {
         Patient patient = appointmentService.getPatientById(dto.patientId());
         if (patient == null) {
