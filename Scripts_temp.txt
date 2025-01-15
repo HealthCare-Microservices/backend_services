@@ -18,3 +18,20 @@ doctor-service : 8201
 patient-service : 8202
 api-gateway : 8203
 service-registry : 8761
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+kubectl delete pods --all
+kubectl delete svc --all
+kubectl delete deployment --all
+kubectl delete statfulset --all
+kubectl apply -f ./
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+DROP USER 'root'@'%';
+CREATE USER 'root'@'%' IDENTIFIED BY '1234';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
