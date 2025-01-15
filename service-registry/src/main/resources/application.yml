@@ -7,7 +7,12 @@ server:
 
 eureka:
   instance:
-    hostname: localhost
+    prefer-ip-address: true
+    hostname: ${EUREKA_HOSTNAME:eureka-0}
   client:
-    fetch-registry: false
-    register-with-eureka: false
+    register-with-eureka: ${EUREKA_REGISTER_WITH_EUREKA:false}
+    fetch-registry: ${EUREKA_FETCH_REGISTRY:false}
+    service-url:
+      #       defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+      #      defaultZone: http://localhost:8761
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://localhost:8761}

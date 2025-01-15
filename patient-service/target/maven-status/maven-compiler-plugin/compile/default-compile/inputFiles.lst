@@ -1,0 +1,14 @@
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\config\CorsConfig.java
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\config\JpaConfig.java
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\controller\PatientController.java
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\converters\PatientDtoConverter.java
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\domain\Illness.java
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\domain\Patient.java
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\dto\PatientDto.java
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\exceptions\DuplicatePatientException.java
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\exceptions\PatientNotFoundException.java
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\exceptions\ServiceExceptionHandler.java
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\PatientServiceApplication.java
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\repository\PatientRepository.java
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\service\PatientService.java
+E:\IIITB\Winter Project\backend_services\patient-service\src\main\java\com\healthcare\patient_service\service\PatientServiceImpl.java

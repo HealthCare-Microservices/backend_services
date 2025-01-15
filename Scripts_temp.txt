@@ -1,0 +1,8 @@
+cd "E:\IIITB\Winter Project\backend_services"
+$services = @("api-gateway", "appointment-service", "doctor-service", "patient-service", "service-registry")
+
+foreach ($service in $services) {
+    docker build -t 48483/$service .\$service
+    docker push 48483/$service
+}
+
