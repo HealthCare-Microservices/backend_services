@@ -46,14 +46,16 @@ public class DoctorServiceImpl implements DoctorService {
         }
     }
 
+
     @Override
-    public boolean authenticateDoctor(String email, String password) {
+    public String authenticateDoctor(String email, String password) {
         try {
             Optional<Doctor> doctor = doctorRepository.findByEmail(email);
             if (doctor.isEmpty()) {
                 throw new IllegalArgumentException("Doctor with email " + email + " not found.");
             }
-            return doctor.get().getPassword().equals(password);
+            if(doctor.get().getPassword().equals(password)) return doctor.get().getId()+"";
+            return "";
         } catch (DataAccessException e) {
             throw new RuntimeException("Error during doctor authentication: " + e.getMessage(), e);
         }

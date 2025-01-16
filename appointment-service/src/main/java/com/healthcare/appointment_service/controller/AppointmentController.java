@@ -7,10 +7,9 @@ import com.healthcare.appointment_service.dto.Patient;
 import com.healthcare.appointment_service.service.AppointmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/appointments")
@@ -22,7 +21,7 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
 
-    @PostMapping("create")
+    @PostMapping("/create")
     public ResponseEntity<AppointmentDto> createAppointment(@RequestBody AppointmentDto dto) {
         Patient patient = appointmentService.getPatientById(dto.patientId());
         if (patient == null) {
@@ -39,4 +38,14 @@ public class AppointmentController {
         var response = appointmentService.createAppointment(appointment);
         return ResponseEntity.status(HttpStatus.CREATED).body(AppointmentDto.fromAppointment(response));
     }
+
+    @GetMapping("/getAppointment")
+    public ResponseEntity<List<AppointmentDto>> getAppointmentsByDoctor(@RequestParam String id) {
+        var appointments = appointmentService.findAllByDoctorId(id);
+        if(appointments.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(AppointmentDto.toDtos(appointments));
+    }
+
 }

@@ -5,6 +5,9 @@ import com.healthcare.patient_service.domain.Patient;
 import com.healthcare.patient_service.dto.PatientDto;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class PatientDtoConverter {
 
@@ -26,5 +29,13 @@ public class PatientDtoConverter {
             patient.setIllnesses(dto.illnesses().stream().map(Illness::new).toList());
         }
         return patient;
+    }
+
+    public List<PatientDto> toDtos(List<Patient> patients) {
+        List<PatientDto> result =new ArrayList<PatientDto>();
+        for (Patient patient : patients) {
+            result.add(toDto(patient));
+        }
+        return  result;
     }
 }

@@ -3,7 +3,7 @@ spring:
     name: patient-service
 
   datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/appointment?createDatabaseIfNotExist=true}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/patient?createDatabaseIfNotExist=true}
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:1234}
     driver-class-name: com.mysql.cj.jdbc.Driver

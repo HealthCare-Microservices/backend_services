@@ -18,7 +18,7 @@ public class DoctorController {
         this.doctorService = doctorService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<DoctorDto> createDoctor(@RequestBody DoctorDto dto) {
         var doctor = doctorService.createDoctor(dto.toDoctor());
         return ResponseEntity.status(HttpStatus.CREATED).body(DoctorDto.fromEntity(doctor));
@@ -30,7 +30,7 @@ public class DoctorController {
         return ResponseEntity.ok(DoctorDto.fromEntity(doctor));
     }
 
-    @GetMapping
+    @GetMapping("/getAllDoctors")
     public ResponseEntity<List<DoctorDto>> getAllDoctors() {
         var doctors = doctorService.getAllDoctors();
         if(doctors.isEmpty()) {
@@ -41,9 +41,9 @@ public class DoctorController {
 
     @PostMapping("/login")
     public ResponseEntity<String> loginDoctor(@RequestParam String email, @RequestParam String password) {
-        boolean isAuthenticated = doctorService.authenticateDoctor(email, password);
-        if (isAuthenticated) {
-            return ResponseEntity.ok("Login successful!");
+        String authenticated = doctorService.authenticateDoctor(email, password);
+        if (!authenticated.isEmpty()) {
+            return ResponseEntity.ok(authenticated);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password.");
         }

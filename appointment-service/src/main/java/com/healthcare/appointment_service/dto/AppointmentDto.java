@@ -2,6 +2,8 @@ package com.healthcare.appointment_service.dto;
 
 import com.healthcare.appointment_service.domain.Appointment;
 
+import java.util.List;
+
 public record AppointmentDto(Long id, String appointmentDate, String appointmentTime,
                              String patientId, String patientName, String patientNumber,
                              String doctorId, String doctorName, String status) {
@@ -17,4 +19,9 @@ public record AppointmentDto(Long id, String appointmentDate, String appointment
         return new Appointment( appointmentDate, appointmentTime, Long.parseLong(patientId),
                 patientName, patientNumber, doctorId, doctorName, status);
     }
+
+    public static List<AppointmentDto> toDtos(List<Appointment> appointments) {
+        return appointments.stream().map(AppointmentDto::fromAppointment).toList();
+    }
+
 }

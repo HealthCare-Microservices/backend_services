@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/patients")
 @Slf4j
@@ -23,7 +25,7 @@ public class PatientController {
         this.converter = converter;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<PatientDto> createPatient(@Valid @RequestBody PatientDto dto) {
         // TODO handle DuplicatePatientException
         // Create a new patient
@@ -45,7 +47,7 @@ public class PatientController {
     }
 
     // GET /api/v1/patients?k=value&v=123
-    @GetMapping
+    @GetMapping("/searchPatient")
     public ResponseEntity<PatientDto> searchForPatient(
             @RequestParam(name = "k") String key,
             @RequestParam(name="v") String data) {
@@ -73,7 +75,13 @@ public class PatientController {
         return ResponseEntity.ok("Patient deleted");
     }
 
-    // TODO Implement the getIllnessForPatient method
-    // GET /api/v1/patients/{id}/illnesses
+    @GetMapping("/all")
+    public ResponseEntity<List<PatientDto>> getAllPatients() {
+        var patients = patientService.getAllPatients();
+        if(patients.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(converter.toDtos(patients));
+    }
 
 }
